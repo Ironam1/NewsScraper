@@ -26,10 +26,11 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 // connect the Mongo DB
-mongoose.connect("mongodb://localhost:27017/NewsScraper", {
-  useNewUrlParser: true
-});
-
+// mongoose.connect("mongodb://localhost:27017/NewsScraper", {
+//   useNewUrlParser: true
+// });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/NewsScraper";
+mongoose.connect(MONGODB_URI)
 // Set Routes
 
 app.get("/", function(req, res) {
@@ -67,6 +68,16 @@ app.get("/scrape", function(req, res) {
   });
 });
 
+app.get("/articles/:id", function(req, res) {
+  db.Article.findOne({ _id: req.params.id })
+    .populate("note")
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
 // Route for posting a note to a specific Article using the article id
 app.post("/articles/:id", function(req, res) {
   db.Note.create(req.body)
