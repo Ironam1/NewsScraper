@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const db = require("./models");
-const PORT = 8080;
+const PORT =   process.env.PORT || 8080;
 
 const app = express();
 
@@ -32,11 +32,14 @@ app.set("view engine", "handlebars");
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/NewsScraper";
 mongoose.connect(MONGODB_URI)
 // Set Routes
+// require("./routes/apiRoutes")(app);
+// require("./routes/htmlRoutes")(app);
 
 app.get("/", function(req, res) {
   db.Article.find({})
     .then(function(dbArticle) {
-      res.json(dbArticle);
+      // res.json(dbArticle);
+      // res.render("index");
     })
     .catch(function(err) {
       res, json(err);
