@@ -38,7 +38,7 @@ mongoose.connect(MONGODB_URI)
 app.get("/", function(req, res) {
   db.Article.find({})
     .then(function(dbArticle) {
-      // res.json(dbArticle);
+      res.json(dbArticle);
       // res.render("index");
     })
     .catch(function(err) {
