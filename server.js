@@ -5,8 +5,7 @@ const mongoose = require("mongoose");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const db = require("./models");
-const PORT =   process.env.PORT || 8080;
-
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 // middleware
@@ -25,27 +24,27 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
-// connect the Mongo DB
-// mongoose.connect("mongodb://localhost:27017/NewsScraper", {
-//   useNewUrlParser: true
-// });
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/NewsScraper";
-mongoose.connect(MONGODB_URI)
-// Set Routes
-// require("./routes/apiRoutes")(app);
-// require("./routes/htmlRoutes")(app);
 
+// DB setup
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/NewsScraper";
+mongoose.connect(MONGODB_URI);
+
+// Set Routes
+
+// require("./routes/index.js")(app);
 app.get("/", function(req, res) {
   db.Article.find({})
     .then(function(dbArticle) {
-      res.json(dbArticle);
-      // res.render("index");
+      // res.json(dbArticle);
+      res.render("index", {
+        msg: "Welcome!",
+        articles: dbArticle
+      });
     })
     .catch(function(err) {
       res, json(err);
     });
 });
-
 app.get("/scrape", function(req, res) {
   axios.get("https://www.npr.org/").then(function(resp) {
     let $ = cheerio.load(resp.data);
@@ -98,7 +97,6 @@ app.post("/articles/:id", function(req, res) {
       res, json(err);
     });
 });
-
 // server start
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
