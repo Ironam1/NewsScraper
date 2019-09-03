@@ -1,17 +1,22 @@
-$.getJSON("/articles", function(data) {
-  for (i = 0; i < data.length; i++) {
-    $("#articles").append(
-      "<p data-id='" +
-        data[i]._id +
-        "'>" +
-        data[i].title +
-        "<br />" +
-        data[i].link +
-        "</p>"
-    );
-  }
-});
+// $.getJSON("/articles", function(data) {
+//   for (i = 0; i < data.length; i++) {
+//     $("#articles").append(
+//       "<p data-id='" +
+//         data[i]._id +
+//         "'>" +
+//         data[i].title +
+//         "<br />" +
+//         data[i].link +
+//         "</p>"
+//     );
+//   }
+// });
+// scrape for articles
+$("#getScrape").on("click", function(evt){
+  evt.preventDefault();
 
+  $.ajax()
+});
 // make note pop up on p tag click
 $(document).on("click", "p", function() {
   $("#notes").empty();
@@ -20,7 +25,7 @@ $(document).on("click", "p", function() {
 
   $.ajax({
     method: "GET",
-    url: "/articles/" + thisId
+    url: "api/articles/" + thisId
   }).then(function(data) {
     console.log(data);
     $("#notes").append("<h2>" + data.title + "</h2>");
@@ -39,7 +44,7 @@ $(document).on("click", "p", function() {
 // save the note function
 $.ajax({
     method: "POST",
-    url: "/articles/" + thisId,
+    url: "api/articles/" + thisId,
     data: {
         title: $("#titleinput").val().trim(),
         body: $("#bodyinput").val().trim()
