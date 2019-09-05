@@ -45,6 +45,19 @@ app.get("/", function(req, res) {
       res, json(err);
     });
 });
+app.get("/articles", function(req, res) {
+  db.Article.find({})
+    .then(function(dbArticle) {
+      // res.json(dbArticle);
+      res.render("index", {
+        msg: "Welcome!",
+        articles: dbArticle
+      });
+    })
+    .catch(function(err) {
+      res, json(err);
+    });
+});
 app.get("/scrape", function(req, res) {
   axios.get("https://www.npr.org/").then(function(resp) {
     let $ = cheerio.load(resp.data);
@@ -65,8 +78,9 @@ app.get("/scrape", function(req, res) {
           console.log(err);
         });
     });
-    // let usr know the scrape is finished
+    // let user know the scrape is finished
     res.send("Scrape Complete");
+    res.render("/");
   });
 });
 
