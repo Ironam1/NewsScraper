@@ -45,8 +45,8 @@ $(document).on("click", "p", function() {
   $("#notes").empty();
   // get the id from the tag
   let thisId = $(this).attr("data-id");
-  console.log(thisId);
-  console.log(this);
+  // console.log(thisId);
+  // console.log(this);
   $.ajax({
     method: "GET",
     url: "/articles/" + thisId
@@ -55,29 +55,32 @@ $(document).on("click", "p", function() {
     $("#notes").append("<h2>" + data.title + "</h2>");
     $("#notes").append("<input id='titleinput' name='title' >");
     $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-    $("#notes").append("<button daya-id='" + data._id + "' id='savenote'>Save Note</button>");
+    $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
     // if there is already a note
     if (data.note) {
-        $("#notes").val(data.note.title);
-        $("#notes").val(data.note.body);
+        $("#titleinput").val(data.note.title);
+        $("#bodyinput").val(data.note.body);
     }
   });
 });
 
 // save the note function
-// $.ajax({
-//     method: "POST",
-//     url: "api/articles/" + thisId,
-//     data: {
-//         title: $("#titleinput").val().trim(),
-//         body: $("#bodyinput").val().trim()
-//     }
-// })
-// .then(function(data){
-//     console.log(data);
-//     $("#notes").empty();
-// });
+$(document).on('click', "#savenote", function () {
+  let thisId= $(this).attr("data-id");
+  $.ajax({
+      method: "POST",
+      url: "/articles/" + thisId,
+      data: {
+          title: $("#titleinput").val().trim(),
+          body: $("#bodyinput").val().trim()
+      }
+  })
+  .then(function(data){
+      console.log(data);
+      $("#notes").empty();
+  });
+});
 
 // also remove other values
 $("#titleinput").val("");

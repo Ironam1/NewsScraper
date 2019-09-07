@@ -31,7 +31,7 @@ mongoose.connect(MONGODB_URI);
 
 // Set Routes
 
-// require("./routes/index.js")(app);
+// require("./routes")(app);
 app.get("/", function(req, res) {
   db.Article.find({})
     .then(function(dbArticle) {

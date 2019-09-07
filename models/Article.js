@@ -27,8 +27,8 @@ const Article = mongoose.model("Article", ArticleSchema);
 
 module.exports = Article;
 
-// Article.schema.path("title").validate(function(value, res) {
-//     Article.findOne({ title: value }, function(err, found) {
-//         if(found) respond(false);
-//     });
-// });
+Article.schema.path("title").validate(function(value, res) {
+    Article.findOne({ title: value }, function(err, found) {
+        if(found) respond(false);
+    });
+});

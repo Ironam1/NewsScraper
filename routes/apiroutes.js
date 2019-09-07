@@ -11,13 +11,13 @@ module.exports = function(app) {
       })
       .catch(function(err) {
         res, json(err);
-      });
+      });  
   });
   app.get("/scrape", function(req, res) {
     axios.get("https://www.npr.org/").then(function(resp) {
       let $ = cheerio.load(resp.data);
       // looks for these tags
-      $("h3").each(function(i, element) {
+      $("h3").each(function(i, eolement) {
         let result = {};
         // gets the text and the link we are looking for
         result.title = $(this).text();
