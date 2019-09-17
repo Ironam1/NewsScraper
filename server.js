@@ -79,8 +79,8 @@ app.get("/scrape", function(req, res) {
         });
     });
     // let user know the scrape is finished
-    res.send("Scrape Complete");
-    res.render("/");
+    res.send("Scrape Complete. Please use back button to return to main page");
+    
   });
 });
 
