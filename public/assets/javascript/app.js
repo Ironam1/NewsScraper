@@ -1,6 +1,6 @@
 $.getJSON("/articles", function(data) {
   for (i = 0; i < data.length; i++) {
-    $("#articles").append(
+    $("#articles").prepend(
       "<p data-id='" +
         data[i]._id +
         "'>" +
