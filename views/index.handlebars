@@ -1,5 +1,6 @@
 <div id="wrapper">
   <h1>Welcome to NewsScaper!</h1>
+  <br>
   <button id="getScrape"><a href="/scrape">Scrape New Articles</a></button>
 </div>
 
@@ -9,7 +10,7 @@
   {{!-- <p>{{this.title}}</p> --}}
   <a href={{this.link}}>{{this.link}}</a>
   {{!-- <button id="favorite">Save Article</button> --}}
-  <button id="addNote">Add Note</button>
+  <button id="addNote" data-id="{{this._id}}">Add Note</button>
   <p>--------</p>
   {{/each}}
 </div>

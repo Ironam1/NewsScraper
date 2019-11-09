@@ -1,5 +1,17 @@
 # NewsScraper
 
-This application scrapes articles from NPR and demonstrates CRUD using Express and Mongoose. UX is a little sloppy, but functionality is there. When the user runs the application the will see a list of scraped articles in the database. User can add a note to any of the saved articles. The notes are saved in a second database and linked to the article with id numbers. User can click on the scrape button to aquire new articles. User must use back button to navigate back to article page.
+This application is hosted on Heroku and can be found here: https://news-scraper-am1.herokuapp.com/
 
-This application is hosted on Heroku and can be found here: https://fast-plateau-84504.herokuapp.com/
+
+The problem:
+
+Scrape articles from NPR and save to a database. Once saved, users can attach notes to each article and save them in a separate database.
+
+Solution:
+
+This is a full stack application to demonstrate a CRUD API. I chose express for routing and Mongoose for my database. I used Cheerio to scrape data from the NPR website. This application uses Handlebars to render the HTML page.
+
+When the application loads, the user will see titles for articles that have been scraped already, links to the articles and a button to add a note . If the user wants to see new articles, they can click the button provided. If no new articles appear, they may have already been scraped that day. No duplicate articles will be saved to the database.
+
+If the user wants to attach a note, they can click the "add note" button to display the note form. User can write a headline and body for their note and save with the provided button.
+

@@ -62,13 +62,16 @@ app.get("/scrape", function(req, res) {
   axios.get("https://www.npr.org/").then(function(resp) {
     let $ = cheerio.load(resp.data);
     // looks for these tags
-    $("h3").each(function(i, element) {
+    $(".story-text").each(function(i, element) {
       let result = {};
       // gets the text and the link we are looking for
       result.title = $(this).text();
       result.link = $(this)
         .parent("a")
         .attr("href");
+      result.img = $(this)
+        .parent("figure")
+        .attr("content");
       // create a new object in our database for each article
       db.Article.create(result)
         .then(function(dbArticle) {
@@ -79,8 +82,7 @@ app.get("/scrape", function(req, res) {
         });
     });
     // let user know the scrape is finished
-    res.send("Scrape Complete. Please use back button to return to main page");
-    
+    res.render("scrape");
   });
 });
 
