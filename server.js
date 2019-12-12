@@ -74,15 +74,17 @@ app.get("/scrape", function(req, res) {
       result.img = $(element)
         .find("img")
         .attr("src");
-        console.log(result)
+      console.log(result);
       // create a new object in our database for each article
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          // console.log(dbArticle);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
+      if (result.title && result.link) {
+        db.Article.create(result)
+          .then(function(dbArticle) {
+            // console.log(dbArticle);
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      }
     });
     // let user know the scrape is finished
     res.render("scrape");

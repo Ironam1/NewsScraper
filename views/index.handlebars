@@ -1,19 +1,24 @@
-<div id="wrapper">
-  <h1>Welcome to NewsScaper!</h1>
-  <br>
-  <button id="getScrape"><a href="/scrape">Scrape New Articles</a></button>
-</div>
+<div class="wrapper">
+  <div class="opener">
+    <h1>Welcome to NewsScaper!</h1>
+    <br>
+    <button id="getScrape"><a href="/scrape">Scrape New Articles</a></button>
+  </div>
 
-<div id="articles">
-  {{#each articles}}
-  <p data-id="{{this._id}}">{{this.title}}</p>
-  {{!-- <p>{{this.title}}</p> --}}
-  <a href={{this.link}}>{{this.link}}</a>
-  {{!-- <button id="favorite">Save Article</button> --}}
-  <button id="addNote" data-id="{{this._id}}">Add Note</button>
-  <p>--------</p>
-  {{/each}}
-</div>
-<div id="notes">
+  <div class="articles">
+    {{#each articles}}
+    <div id="article">
 
+      <p data-id="{{this._id}}">{{this.title}}</p>
+      {{!-- <p>{{this.title}}</p> --}}
+      <a href={{this.link}}>{{this.link}}</a>
+      <img src={{this.img}} alt="photo"></img>
+      {{!-- <button id="favorite">Save Article</button> --}}
+      <button id="addNote" data-id="{{this._id}}">Add Note</button>
+      <p>--------</p>
+      {{/each}}
+      <div id="notes"> </div>
+    </div>
+
+  </div>
 </div>
