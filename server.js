@@ -27,7 +27,7 @@ app.set("view engine", "handlebars");
 
 // DB setup
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/NewsScraper";
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Set Routes
 
@@ -62,20 +62,23 @@ app.get("/scrape", function(req, res) {
   axios.get("https://www.npr.org/").then(function(resp) {
     let $ = cheerio.load(resp.data);
     // looks for these tags
-    $(".story-text").each(function(i, element) {
+    $(".story-wrap").each(function(i, element) {
       let result = {};
       // gets the text and the link we are looking for
-      result.title = $(this).text();
-      result.link = $(this)
-        .parent("a")
+      result.title = $(element)
+        .find("h3")
+        .text();
+      result.link = $(element)
+        .find("a")
         .attr("href");
-      result.img = $(this)
-        .parent("figure")
-        .attr("content");
+      result.img = $(element)
+        .find("img")
+        .attr("src");
+        console.log(result)
       // create a new object in our database for each article
       db.Article.create(result)
         .then(function(dbArticle) {
-          console.log(dbArticle);
+          // console.log(dbArticle);
         })
         .catch(function(err) {
           console.log(err);
