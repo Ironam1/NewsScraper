@@ -22,7 +22,10 @@ const ArticleSchema = new Schema({
     type: String,
     required: false
   },
-
+  text: {
+    type: String,
+    required: true
+  },
   note: {
     type: Schema.Types.ObjectId,
     ref: "Note"

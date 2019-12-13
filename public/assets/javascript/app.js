@@ -12,7 +12,7 @@ $.getJSON("/articles", function(data) {
   }
 });
 
-// make note pop up on p tag click
+// make note pop up on add note button click
 $(document).on("click", "#addNote", function() {
   $("#notes").empty();
 
@@ -22,8 +22,8 @@ $(document).on("click", "#addNote", function() {
     method: "GET",
     url: "/articles/" + thisId
   }).then(function(data) {
-    console.log(data);
-    $("#notes").append("<h2>" + data.title + "</h2>");
+    // console.log(data);
+    $("#notes").append("<h5>" + data.title + "</h2>");
     $("#notes").append("<input id='titleinput' name='title' >");
     $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
     $("#notes").append(

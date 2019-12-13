@@ -9,15 +9,20 @@
     {{#each articles}}
     <div id="article">
 
-      <p data-id="{{this._id}}">{{this.title}}</p>
-      {{!-- <p>{{this.title}}</p> --}}
-      <a href={{this.link}}>{{this.link}}</a>
-      <img src={{this.img}} alt="photo"></img>
+      <a href={{this.link}}>
+        <h3 data-id="{{this._id}}">{{this.title}}</h1>
+          {{!-- <p>{{this.title}}</p> --}}
+
+          {{#if this.img}}
+          <img src={{this.img}} alt="photo"></img>
+          {{/if}}
+          <p>{{this.text}}</p>
+      </a>
       {{!-- <button id="favorite">Save Article</button> --}}
       <button id="addNote" data-id="{{this._id}}">Add Note</button>
       <p>--------</p>
-      {{/each}}
       <div id="notes"> </div>
+      {{/each}}
     </div>
 
   </div>

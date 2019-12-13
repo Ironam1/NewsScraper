@@ -74,6 +74,10 @@ app.get("/scrape", function(req, res) {
       result.img = $(element)
         .find("img")
         .attr("src");
+      result.text = $(element)
+        .find(".story-text")
+        .find("p")
+        .text();
       console.log(result);
       // create a new object in our database for each article
       if (result.title && result.link) {
